@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/tabs/controller/for_route.dart';
 
 class NameMean extends StatefulWidget {
-  final ValueChanged<int> onPush;
+  final ValueChanged<ForRoute> onPush;
 
   NameMean({Key key, this.onPush}) : super(key: key);
 
@@ -11,7 +12,7 @@ class NameMean extends StatefulWidget {
 }
 
 class _NameMeanState extends State<NameMean> {
-  final ValueChanged<int> onPush;
+  final ValueChanged<ForRoute> onPush;
 
   _NameMeanState(this.onPush);
 

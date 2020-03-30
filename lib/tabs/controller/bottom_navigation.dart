@@ -52,7 +52,6 @@ class BottomNavigation extends StatelessWidget {
 
   BottomNavigationBarItem _buildItem({TabItem tabItem}) {
     String text = tabName[tabItem];
-    IconData icon = Icons.layers;
     return BottomNavigationBarItem(
       icon: Icon(
         tabIcons[tabItem],

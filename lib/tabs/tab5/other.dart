@@ -1,19 +1,23 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/tabs/controller/for_route.dart';
 
 class Other extends StatefulWidget {
-  final ValueChanged<int> onPush;
+  final ValueChanged<ForRoute> onPush;
+  final EventBus eventBus;
 
-  Other({Key key, this.onPush}) : super(key: key);
+  Other({Key key, this.onPush, this.eventBus}) : super(key: key);
 
   @override
-  _OtherState createState() => _OtherState(onPush);
+  _OtherState createState() => _OtherState(onPush, eventBus);
 
 }
 
 class _OtherState extends State<Other> {
-  final ValueChanged<int> onPush;
+  final ValueChanged<ForRoute> onPush;
+  final EventBus eventBus;
 
-  _OtherState(this.onPush);
+  _OtherState(this.onPush, this.eventBus);
 
   @override
   void initState() {
@@ -24,4 +28,5 @@ class _OtherState extends State<Other> {
   Widget build(BuildContext context) {
     return Scaffold();
   }
+
 }

@@ -1,7 +1,9 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-import 'package:kuranfihristi/tabs/controller/detail_page.dart';
-import 'package:kuranfihristi/tabs/controller/list_page.dart';
+import 'package:kuranfihristi/help/const.dart';
 import 'package:kuranfihristi/tabs/controller/bottom_navigation.dart';
+import 'package:kuranfihristi/tabs/controller/for_route.dart';
+import 'package:kuranfihristi/tabs/controller/tab_pages.dart';
 
 
 class TabNavigatorRoutes {
@@ -10,37 +12,44 @@ class TabNavigatorRoutes {
 }
 
 class TabNavigator extends StatelessWidget {
-  TabNavigator({this.navigatorKey, this.tabItem});
+  TabNavigator({this.navigatorKey, this.tabItem, this.eventBus});
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
+  final EventBus eventBus;
 
-  void _push(BuildContext context, {int materialIndex: 500}) {
-    var routeBuilders = _routeBuilders(context, materialIndex: materialIndex);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => routeBuilders[TabNavigatorRoutes.detail](context),
-      ),
-    );
+  void _push(BuildContext context, {ForRoute forRoute}) {
+    var routeBuilders = _routeBuilders(context, forRoute: forRoute);
+    Navigator.push(context,
+        Const.customRoute((context) => routeBuilders[forRoute.route](context)));
   }
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
-      {int materialIndex: 500}) {
-    print('tabItem -> ${tabItem}');
+      {ForRoute forRoute}) {
     return {
-      TabNavigatorRoutes.root: (context) => ListPage(
-        color: activeTabColor[tabItem],
+      TabNavigatorRoutes.root: (context) => TabPages(
         title: tabName[tabItem],
-        onPush: (materialIndex) =>
-            _push(context, materialIndex: materialIndex),
+        tabItem: tabItem,
+        eventBus: eventBus,
+        onPush: (forRoute) => _push(context, forRoute: forRoute),
       ),
-      TabNavigatorRoutes.detail: (context) => DetailPage(
-        color: activeTabColor[tabItem],
-        title: tabName[tabItem],
-        materialIndex: materialIndex,
-      ),
+      TabNavigatorRoutes.detail: (context) => forRoute.widget,
     };
+
+//    return {
+//      TabNavigatorRoutes.root: (context) {
+//        return ListPage(
+//          color: activeTabColor[tabItem],
+//          title: tabName[tabItem],
+//          onPush: (materialIndex) =>
+//              _push(context, materialIndex: materialIndex),
+//        );
+//      },
+//      TabNavigatorRoutes.detail: (context) => DetailPage(
+//        color: activeTabColor[tabItem],
+//        title: tabName[tabItem],
+//        materialIndex: materialIndex,
+//      ),
+//    };
   }
 
   @override

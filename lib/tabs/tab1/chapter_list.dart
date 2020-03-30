@@ -1,18 +1,22 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/tabs/controller/for_route.dart';
 
-class Template extends StatefulWidget {
-  final ValueChanged<int> onPush;
+class ChapterList extends StatefulWidget {
+  final ValueChanged<ForRoute> onPush;
+  final EventBus eventBus;
 
-  Template({Key key, this.onPush}) : super(key: key);
+  ChapterList({Key key, this.onPush, this.eventBus}) : super(key: key);
 
   @override
-  _TemplateState createState() => _TemplateState(onPush);
+  _ChapterListState createState() => _ChapterListState(onPush, eventBus);
 }
 
-class _TemplateState extends State<Template> {
-  final ValueChanged<int> onPush;
+class _ChapterListState extends State<ChapterList> {
+  final ValueChanged<ForRoute> onPush;
+  final EventBus eventBus;
 
-  _TemplateState(this.onPush);
+  _ChapterListState(this.onPush, this.eventBus);
 
   @override
   void initState() {

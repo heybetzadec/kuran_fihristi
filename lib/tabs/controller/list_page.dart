@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/tabs/controller/for_route.dart';
 
 class ListPage extends StatelessWidget {
   ListPage({this.color, this.title, this.onPush});
   final MaterialColor color;
   final String title;
-  final ValueChanged<int> onPush;
+  final ValueChanged<ForRoute> onPush;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class ListPage extends StatelessWidget {
             child: ListTile(
               title: Text('$materialIndex', style: TextStyle(fontSize: 24.0)),
               trailing: Icon(Icons.chevron_right),
-              onTap: () => onPush(materialIndex),
+//              onTap: () => onPush(materialIndex),
             ),
           );
         });
