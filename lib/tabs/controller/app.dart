@@ -1,6 +1,15 @@
+import 'dart:io';
+
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/help/event_key.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/controller/bottom_navigation.dart';
 import 'package:kuranfihristi/tabs/controller/tab_navigator.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:flutter/services.dart';
 
 class App extends StatefulWidget {
   @override
@@ -9,6 +18,9 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   TabItem _currentTab = TabItem.chapter;
+  EventBus eventBus = new EventBus();
+  RouteBus routeBus;
+
   Map<TabItem, GlobalKey<NavigatorState>> _navigatorKeys = {
     TabItem.chapter: GlobalKey<NavigatorState>(),
     TabItem.words: GlobalKey<NavigatorState>(),
@@ -17,9 +29,53 @@ class AppState extends State<App> {
     TabItem.other: GlobalKey<NavigatorState>(),
   };
 
+  @override
+  void initState() {
+    var dbf = getDatabase();
+    routeBus = new RouteBus(
+        eventBus: eventBus,
+        dbf: dbf
+    );
+    super.initState();
+  }
+
+
   void _selectTab(TabItem tabItem) {
+
+    switch (tabItem) {
+      case TabItem.chapter:
+        {
+          eventBus.fire(ChapterEvent('event'));
+        }
+        break;
+      case TabItem.words:
+        {
+          eventBus.fire(LetterEvent('event'));
+        }
+        break;
+      case TabItem.theme:
+        {
+          eventBus.fire(ThemeEvent('event'));
+        }
+        break;
+      case TabItem.names:
+        {
+          eventBus.fire(NameEvent('event'));
+        }
+        break;
+      case TabItem.other:
+        {
+          eventBus.fire(OtherEvent('event'));
+        }
+        break;
+      default:
+        {
+          eventBus.fire(ChapterEvent('event'));
+        }
+        break;
+    }
+
     if (tabItem == _currentTab) {
-      // pop to first route
       _navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
     } else {
       setState(() => _currentTab = tabItem);
@@ -60,11 +116,46 @@ class AppState extends State<App> {
     );
   }
 
+  Future<Database> getDatabase() async {
+    var databasesPath = await getDatabasesPath();
+    var path = join(databasesPath, "app_data.db");
+
+    // Check if the database exists
+    var exists = await databaseExists(path);
+
+    if (!exists) {
+      // Should happen only the first time you launch your application
+      print("Creating new copy from asset");
+
+      // Make sure the parent directory exists
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
+
+      // Copy from asset
+      ByteData data = await rootBundle.load(join("assets", "app_data.db"));
+      List<int> bytes =
+      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+
+      // Write and flush the bytes written
+      await File(path).writeAsBytes(bytes, flush: true);
+
+    } else {
+      print("Opening existing database");
+    }
+    // open the database
+    var db = await openDatabase(path, readOnly: true);
+
+
+    return db;
+  }
+
   Widget _buildOffstageNavigator(TabItem tabItem) {
     return Offstage(
       offstage: _currentTab != tabItem,
       child: TabNavigator(
         navigatorKey: _navigatorKeys[tabItem],
+        routeBus:routeBus,
         tabItem: tabItem,
       ),
     );

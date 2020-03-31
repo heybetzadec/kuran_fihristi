@@ -1,6 +1,7 @@
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:kuranfihristi/help/const.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/controller/bottom_navigation.dart';
 import 'package:kuranfihristi/tabs/controller/for_route.dart';
 import 'package:kuranfihristi/tabs/controller/tab_pages.dart';
@@ -11,11 +12,12 @@ class TabNavigatorRoutes {
 }
 
 class TabNavigator extends StatelessWidget {
-  TabNavigator({this.navigatorKey, this.tabItem, this.eventBus});
+  TabNavigator({this.navigatorKey, this.tabItem, this.routeBus});
 
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
-  final EventBus eventBus;
+//  final EventBus eventBus;
+  final RouteBus routeBus;
 
   void _push(BuildContext context, {ForRoute forRoute}) {
     var routeBuilders = _routeBuilders(context, forRoute: forRoute);
@@ -29,7 +31,7 @@ class TabNavigator extends StatelessWidget {
       TabNavigatorRoutes.root: (context) => TabPages(
             title: tabName[tabItem],
             tabItem: tabItem,
-            eventBus: eventBus,
+            routeBus: routeBus,
             onPush: (forRoute) => _push(context, forRoute: forRoute),
           ),
       TabNavigatorRoutes.detail: (context) => forRoute.widget,

@@ -1,5 +1,6 @@
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/controller/bottom_navigation.dart';
 import 'package:kuranfihristi/tabs/controller/for_route.dart';
 import 'package:kuranfihristi/tabs/tab1/chapter_list.dart';
@@ -9,12 +10,15 @@ import 'package:kuranfihristi/tabs/tab4/name_list.dart';
 import 'package:kuranfihristi/tabs/tab5/other.dart';
 
 class TabPages extends StatelessWidget {
-  TabPages({this.title, this.onPush, this.tabItem, this.eventBus});
-
   final String title;
   final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+//  final EventBus eventBus;
   final TabItem tabItem;
+  final RouteBus routeBus;
+
+  TabPages({this.title, this.onPush, this.tabItem, this.routeBus});
+
+
   Widget widgetTab;
 
 //  _buildItem(tabItem: TabItem.chapter),
@@ -29,8 +33,7 @@ class TabPages extends StatelessWidget {
       case TabItem.chapter:
         {
           widgetTab = ChapterList(
-            onPush: onPush,
-            eventBus: eventBus,
+            routeBus: routeBus,
           );
         }
         break;
@@ -38,7 +41,7 @@ class TabPages extends StatelessWidget {
         {
           widgetTab = LetterList(
             onPush: onPush,
-            eventBus: eventBus,
+//            eventBus: eventBus,
           );
         }
         break;
@@ -46,7 +49,7 @@ class TabPages extends StatelessWidget {
         {
           widgetTab = ThemeList(
             onPush: onPush,
-            eventBus: eventBus,
+//            eventBus: eventBus,
           );
         }
         break;
@@ -54,7 +57,7 @@ class TabPages extends StatelessWidget {
         {
           widgetTab = NameList(
             onPush: onPush,
-            eventBus: eventBus,
+//            eventBus: eventBus,
           );
         }
         break;
@@ -62,15 +65,14 @@ class TabPages extends StatelessWidget {
         {
           widgetTab = Other(
             onPush: onPush,
-            eventBus: eventBus,
+//            eventBus: eventBus,
           );
         }
         break;
       default:
         {
           widgetTab = ChapterList(
-            onPush: onPush,
-            eventBus: eventBus,
+            routeBus: routeBus,
           );
         }
         break;

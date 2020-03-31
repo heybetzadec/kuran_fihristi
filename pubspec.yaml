@@ -50,7 +50,7 @@ dev_dependencies:
 flutter:
 
   assets:
-    - assets/database/app_database
+    - assets/app_data.db
     - assets/locale/i18n_en.json
     - assets/locale/i18n_tr.json
 
