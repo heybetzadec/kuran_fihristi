@@ -10,7 +10,6 @@ class VerseList extends StatefulWidget {
 
   @override
   _VerseListState createState() => _VerseListState(onPush, eventBus);
-
 }
 
 class _VerseListState extends State<VerseList> {

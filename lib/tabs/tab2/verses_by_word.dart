@@ -10,7 +10,6 @@ class VersesByWord extends StatefulWidget {
 
   @override
   _VersesByWordState createState() => _VersesByWordState(onPush, eventBus);
-
 }
 
 class _VersesByWordState extends State<VersesByWord> {

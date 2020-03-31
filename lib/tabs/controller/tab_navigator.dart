@@ -5,7 +5,6 @@ import 'package:kuranfihristi/tabs/controller/bottom_navigation.dart';
 import 'package:kuranfihristi/tabs/controller/for_route.dart';
 import 'package:kuranfihristi/tabs/controller/tab_pages.dart';
 
-
 class TabNavigatorRoutes {
   static const String root = '/';
   static const String detail = '/detail';
@@ -13,6 +12,7 @@ class TabNavigatorRoutes {
 
 class TabNavigator extends StatelessWidget {
   TabNavigator({this.navigatorKey, this.tabItem, this.eventBus});
+
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
   final EventBus eventBus;
@@ -27,11 +27,11 @@ class TabNavigator extends StatelessWidget {
       {ForRoute forRoute}) {
     return {
       TabNavigatorRoutes.root: (context) => TabPages(
-        title: tabName[tabItem],
-        tabItem: tabItem,
-        eventBus: eventBus,
-        onPush: (forRoute) => _push(context, forRoute: forRoute),
-      ),
+            title: tabName[tabItem],
+            tabItem: tabItem,
+            eventBus: eventBus,
+            onPush: (forRoute) => _push(context, forRoute: forRoute),
+          ),
       TabNavigatorRoutes.detail: (context) => forRoute.widget,
     };
 

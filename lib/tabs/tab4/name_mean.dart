@@ -8,7 +8,6 @@ class NameMean extends StatefulWidget {
 
   @override
   _NameMeanState createState() => _NameMeanState(onPush);
-
 }
 
 class _NameMeanState extends State<NameMean> {

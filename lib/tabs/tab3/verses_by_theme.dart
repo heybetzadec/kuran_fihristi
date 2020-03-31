@@ -10,7 +10,6 @@ class VersesByTheme extends StatefulWidget {
 
   @override
   _VersesByThemeState createState() => _VersesByThemeState(onPush, eventBus);
-
 }
 
 class _VersesByThemeState extends State<VersesByTheme> {

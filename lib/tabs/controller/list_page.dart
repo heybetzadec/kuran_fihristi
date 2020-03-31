@@ -3,6 +3,7 @@ import 'package:kuranfihristi/tabs/controller/for_route.dart';
 
 class ListPage extends StatelessWidget {
   ListPage({this.color, this.title, this.onPush});
+
   final MaterialColor color;
   final String title;
   final ValueChanged<ForRoute> onPush;
@@ -22,7 +23,18 @@ class ListPage extends StatelessWidget {
         ));
   }
 
-  final List<int> materialIndices = [900, 800, 700, 600, 500, 400, 300, 200, 100, 50];
+  final List<int> materialIndices = [
+    900,
+    800,
+    700,
+    600,
+    500,
+    400,
+    300,
+    200,
+    100,
+    50
+  ];
 
   Widget _buildList() {
     return ListView.builder(

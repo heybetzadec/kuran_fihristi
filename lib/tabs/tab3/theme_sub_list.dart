@@ -10,7 +10,6 @@ class ThemeSubList extends StatefulWidget {
 
   @override
   _ThemeSubListState createState() => _ThemeSubListState(onPush, eventBus);
-
 }
 
 class _ThemeSubListState extends State<ThemeSubList> {

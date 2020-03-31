@@ -10,7 +10,6 @@ class LetterList extends StatefulWidget {
 
   @override
   _LetterListState createState() => _LetterListState(onPush, eventBus);
-
 }
 
 class _LetterListState extends State<LetterList> {

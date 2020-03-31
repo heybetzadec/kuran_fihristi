@@ -10,7 +10,6 @@ class WordList extends StatefulWidget {
 
   @override
   _WordListState createState() => _WordListState(onPush);
-
 }
 
 class _WordListState extends State<WordList> {

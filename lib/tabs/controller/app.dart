@@ -8,9 +8,9 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  TabItem _currentTab = TabItem.sura;
+  TabItem _currentTab = TabItem.chapter;
   Map<TabItem, GlobalKey<NavigatorState>> _navigatorKeys = {
-    TabItem.sura: GlobalKey<NavigatorState>(),
+    TabItem.chapter: GlobalKey<NavigatorState>(),
     TabItem.words: GlobalKey<NavigatorState>(),
     TabItem.theme: GlobalKey<NavigatorState>(),
     TabItem.names: GlobalKey<NavigatorState>(),
@@ -31,12 +31,12 @@ class AppState extends State<App> {
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
-        !await _navigatorKeys[_currentTab].currentState.maybePop();
+            !await _navigatorKeys[_currentTab].currentState.maybePop();
         if (isFirstRouteInCurrentTab) {
           // if not on the 'main' tab
-          if (_currentTab != TabItem.sura) {
+          if (_currentTab != TabItem.chapter) {
             // select 'main' tab
-            _selectTab(TabItem.sura);
+            _selectTab(TabItem.chapter);
             // back button handled by app
             return false;
           }
@@ -46,7 +46,7 @@ class AppState extends State<App> {
       },
       child: Scaffold(
         body: Stack(children: <Widget>[
-          _buildOffstageNavigator(TabItem.sura),
+          _buildOffstageNavigator(TabItem.chapter),
           _buildOffstageNavigator(TabItem.words),
           _buildOffstageNavigator(TabItem.theme),
           _buildOffstageNavigator(TabItem.names),

@@ -1,6 +1,8 @@
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:kuranfihristi/tabs/controller/for_route.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class ChapterList extends StatefulWidget {
   final ValueChanged<ForRoute> onPush;
@@ -18,8 +20,17 @@ class _ChapterListState extends State<ChapterList> {
 
   _ChapterListState(this.onPush, this.eventBus);
 
+
+  Future<void> getDatabase() async {
+    var databasesPath = await getDatabasesPath();
+    print('databasesPath=$databasesPath');
+//    String path = join(databasesPath, 'demo.db');
+  }
+
   @override
   void initState() {
+    print('chapter');
+    getDatabase();
     super.initState();
   }
 
@@ -27,4 +38,5 @@ class _ChapterListState extends State<ChapterList> {
   Widget build(BuildContext context) {
     return Scaffold();
   }
+
 }

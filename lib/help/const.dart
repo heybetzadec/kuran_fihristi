@@ -59,7 +59,6 @@ class Const {
     return "$hoursStr:$minutesStr:$secondsStr";
   }
 
-
   static Route<Object> customRoute(buildContext) {
     if (Platform.isIOS) {
       return CupertinoPageRoute(

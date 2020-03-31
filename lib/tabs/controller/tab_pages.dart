@@ -17,48 +17,64 @@ class TabPages extends StatelessWidget {
   final TabItem tabItem;
   Widget widgetTab;
 
-//  _buildItem(tabItem: TabItem.sura),
+//  _buildItem(tabItem: TabItem.chapter),
 //  _buildItem(tabItem: TabItem.words),
 //  _buildItem(tabItem: TabItem.theme),
 //  _buildItem(tabItem: TabItem.names),
 //  _buildItem(tabItem: TabItem.other),
 
-
   @override
   Widget build(BuildContext context) {
     switch (tabItem) {
-      case TabItem.sura:
+      case TabItem.chapter:
         {
-          widgetTab =  ChapterList(onPush: onPush, eventBus: eventBus,);
+          widgetTab = ChapterList(
+            onPush: onPush,
+            eventBus: eventBus,
+          );
         }
         break;
       case TabItem.words:
         {
-          widgetTab = LetterList(onPush: onPush, eventBus: eventBus,);
+          widgetTab = LetterList(
+            onPush: onPush,
+            eventBus: eventBus,
+          );
         }
         break;
       case TabItem.theme:
         {
-          widgetTab = ThemeList(onPush: onPush, eventBus: eventBus,);
+          widgetTab = ThemeList(
+            onPush: onPush,
+            eventBus: eventBus,
+          );
         }
         break;
       case TabItem.names:
         {
-          widgetTab = NameList(onPush: onPush, eventBus: eventBus,);
+          widgetTab = NameList(
+            onPush: onPush,
+            eventBus: eventBus,
+          );
         }
         break;
       case TabItem.other:
         {
-          widgetTab = Other(onPush: onPush, eventBus: eventBus,);
+          widgetTab = Other(
+            onPush: onPush,
+            eventBus: eventBus,
+          );
         }
         break;
       default:
         {
-          widgetTab = ChapterList(onPush: onPush, eventBus: eventBus,);
+          widgetTab = ChapterList(
+            onPush: onPush,
+            eventBus: eventBus,
+          );
         }
         break;
     }
     return Scaffold(body: widgetTab);
   }
-
 }

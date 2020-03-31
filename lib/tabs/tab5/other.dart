@@ -10,7 +10,6 @@ class Other extends StatefulWidget {
 
   @override
   _OtherState createState() => _OtherState(onPush, eventBus);
-
 }
 
 class _OtherState extends State<Other> {
@@ -28,5 +27,4 @@ class _OtherState extends State<Other> {
   Widget build(BuildContext context) {
     return Scaffold();
   }
-
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/help/translations.dart';
+import 'package:kuranfihristi/help/locale_util.dart';
 import 'package:kuranfihristi/tabs/controller/app.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,6 +14,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      localizationsDelegates: [
+        const TranslationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: localeUtil.supportedLocales(),
+      localeResolutionCallback:
+          (Locale locale, Iterable<Locale> supportedLocales) {
+        //print("change language");
+        return locale;
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //

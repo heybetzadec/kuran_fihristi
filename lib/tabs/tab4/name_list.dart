@@ -10,7 +10,6 @@ class NameList extends StatefulWidget {
 
   @override
   _NameListState createState() => _NameListState(onPush, eventBus);
-
 }
 
 class _NameListState extends State<NameList> {
