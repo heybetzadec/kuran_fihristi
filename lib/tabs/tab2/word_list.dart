@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:kuranfihristi/help/base_app_bar.dart';
+import 'package:kuranfihristi/help/const.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
+import 'package:kuranfihristi/tabs/tab2/verses_by_word.dart';
 
 class WordList extends StatefulWidget {
   final RouteBus routeBus;
@@ -58,7 +60,15 @@ class _WordListState extends State<WordList> {
               elevation: 1,
               child: new InkWell(
                 onTap: () {
-                  print('on tap');
+                  Navigator.of(context).push(
+                      Const.customRoute((context) {
+                        return VersesByWord(
+                          routeBus: routeBus,
+                          letterId: letterId,
+                          wordId: itemValue.first,
+                        );
+                      })
+                  );
                 },
                 child: ListTile(
                   title: Text('${itemValue.last}'),

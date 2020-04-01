@@ -53,7 +53,7 @@ class _VersesByWordState extends State<VersesByWord> {
         child: ListView.builder(
           itemCount: dataList.length,
           itemBuilder: (context, index) {
-            var itemValue = dataList[index].values;
+            var itemValue = dataList[index].values.toList();
             return new Card(
               margin: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 1),
               shape: RoundedRectangleBorder(
@@ -65,10 +65,9 @@ class _VersesByWordState extends State<VersesByWord> {
                   print('on tap');
                 },
                 child: ListTile(
-                  title: Text('${itemValue.last}'),
+                  title: Text('${itemValue.first}:${itemValue[1]}. ${itemValue.last}'),
                 ),
               ),
-//                color: Colors.transparent,
             );
           },
         ),
