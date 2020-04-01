@@ -1,22 +1,19 @@
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-import 'package:kuranfihristi/tabs/controller/for_route.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 
 class ThemeList extends StatefulWidget {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  ThemeList({Key key, this.onPush, this.eventBus}) : super(key: key);
+  ThemeList({Key key, this.routeBus}) : super(key: key);
 
   @override
-  _ThemeListState createState() => _ThemeListState(onPush, eventBus);
+  _ThemeListState createState() => _ThemeListState(routeBus);
 }
 
 class _ThemeListState extends State<ThemeList> {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  _ThemeListState(this.onPush, this.eventBus);
+  _ThemeListState(this.routeBus);
 
   @override
   void initState() {

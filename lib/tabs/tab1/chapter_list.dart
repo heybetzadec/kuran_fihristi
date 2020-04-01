@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/help/base_app_bar.dart';
+import 'package:kuranfihristi/help/const.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/tab1/verse_list.dart';
 import 'package:sqflite/sqflite.dart';
@@ -22,17 +24,16 @@ class _ChapterListState extends State<ChapterList> {
 
   _ChapterListState(this.routeBus);
 
-
+  var dataList = new List<Map<String, dynamic>>();
 
 
   @override
   void initState() {
     routeBus.dbf.then((db) {
-      db.rawQuery("SELECT name FROM sqlite_master  WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' UNION ALL SELECT name FROM sqlite_temp_master  WHERE type IN ('table','view') ORDER BY 1;").then((value) {
-        for (var val in value) {
-          print("val = $val");
-        }
-        print('value = $value');
+      db.rawQuery("SELECT ChapterID, ChapterName  FROM Chapter WHERE DatabaseID=121 ORDER BY ChapterID;").then((value) {
+        setState(() {
+          dataList = value.toList();
+        });
       });
     });
     super.initState();
@@ -41,18 +42,51 @@ class _ChapterListState extends State<ChapterList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: BaseAppBar(
+        title: 'Sura',
+        appBar: AppBar(),
+      ),
       body: Container(
-        child: Center(
-          child: FlatButton(
-              onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                  return VerseList();
-                }));
-              },
-              child: Text(
-                'Clcik'
-              )
-          ),
+        margin: EdgeInsets.only(
+          top: 2
+        ),
+        child: ListView.builder(
+          itemCount: dataList.length,
+          itemBuilder: (context, index) {
+            var itemValue = dataList[index].values;
+            return new Card(
+              margin: EdgeInsets.only(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 1
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              elevation: 1,
+              child: new InkWell(
+                onTap: (){
+                  Navigator.of(context).push(
+                      Const.customRoute((context) {
+                        return VerseList(
+                          routeBus: routeBus,
+                          chapterId: itemValue.first,
+                        );
+                      })
+                  );
+                },
+                child: ListTile(
+                  title: Text('${itemValue.first}. ${itemValue.last}'),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 18,
+                  ),
+                ),
+              ),
+//                color: Colors.transparent,
+            );
+          },
         ),
       ),
     );

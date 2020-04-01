@@ -1,22 +1,19 @@
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-import 'package:kuranfihristi/tabs/controller/for_route.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 
 class VersesByWord extends StatefulWidget {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  VersesByWord({Key key, this.onPush, this.eventBus}) : super(key: key);
+  VersesByWord({Key key, this.routeBus}) : super(key: key);
 
   @override
-  _VersesByWordState createState() => _VersesByWordState(onPush, eventBus);
+  _VersesByWordState createState() => _VersesByWordState(routeBus);
 }
 
 class _VersesByWordState extends State<VersesByWord> {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  _VersesByWordState(this.onPush, this.eventBus);
+  _VersesByWordState(this.routeBus);
 
   @override
   void initState() {

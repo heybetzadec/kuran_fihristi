@@ -1,21 +1,21 @@
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/controller/for_route.dart';
 
 class WordList extends StatefulWidget {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  WordList({Key key, this.onPush, this.eventBus}) : super(key: key);
+  WordList({Key key, this.routeBus}) : super(key: key);
 
   @override
-  _WordListState createState() => _WordListState(onPush);
+  _WordListState createState() => _WordListState(routeBus);
 }
 
 class _WordListState extends State<WordList> {
-  final ValueChanged<ForRoute> onPush;
+  final RouteBus routeBus;
 
-  _WordListState(this.onPush);
+  _WordListState(this.routeBus);
 
   @override
   void initState() {

@@ -145,7 +145,7 @@ class AppState extends State<App> {
     }
     // open the database
     var db = await openDatabase(path, readOnly: true);
-
+//    db.execute('PRAGMA encoding = "UTF-8";');
 
     return db;
   }

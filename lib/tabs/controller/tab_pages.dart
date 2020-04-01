@@ -40,32 +40,28 @@ class TabPages extends StatelessWidget {
       case TabItem.words:
         {
           widgetTab = LetterList(
-            onPush: onPush,
-//            eventBus: eventBus,
+            routeBus: routeBus,
           );
         }
         break;
       case TabItem.theme:
         {
           widgetTab = ThemeList(
-            onPush: onPush,
-//            eventBus: eventBus,
+            routeBus: routeBus,
           );
         }
         break;
       case TabItem.names:
         {
           widgetTab = NameList(
-            onPush: onPush,
-//            eventBus: eventBus,
+            routeBus: routeBus,
           );
         }
         break;
       case TabItem.other:
         {
           widgetTab = Other(
-            onPush: onPush,
-//            eventBus: eventBus,
+            routeBus: routeBus,
           );
         }
         break;

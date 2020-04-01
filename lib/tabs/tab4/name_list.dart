@@ -1,22 +1,19 @@
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-import 'package:kuranfihristi/tabs/controller/for_route.dart';
+import 'package:kuranfihristi/help/route_bus.dart';
 
 class NameList extends StatefulWidget {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  NameList({Key key, this.onPush, this.eventBus}) : super(key: key);
+  NameList({Key key, this.routeBus}) : super(key: key);
 
   @override
-  _NameListState createState() => _NameListState(onPush, eventBus);
+  _NameListState createState() => _NameListState(routeBus);
 }
 
 class _NameListState extends State<NameList> {
-  final ValueChanged<ForRoute> onPush;
-  final EventBus eventBus;
+  final RouteBus routeBus;
 
-  _NameListState(this.onPush, this.eventBus);
+  _NameListState(this.routeBus);
 
   @override
   void initState() {
