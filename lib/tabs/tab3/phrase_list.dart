@@ -3,22 +3,23 @@ import 'package:kuranfihristi/help/base_app_bar.dart';
 import 'package:kuranfihristi/help/const.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/tab2/verses_by_word.dart';
+import 'package:kuranfihristi/tabs/tab3/verses_by_theme.dart';
 
-class WordList extends StatefulWidget {
+class PhraseList extends StatefulWidget {
   final RouteBus routeBus;
-  final int letterId;
+  final int themeId;
 
-  WordList({Key key, this.routeBus, this.letterId}) : super(key: key);
+  PhraseList({Key key, this.routeBus, this.themeId}) : super(key: key);
 
   @override
-  _WordListState createState() => _WordListState(routeBus, letterId);
+  _PhraseListState createState() => _PhraseListState(routeBus, themeId);
 }
 
-class _WordListState extends State<WordList> {
+class _PhraseListState extends State<PhraseList> {
   final RouteBus routeBus;
-  final int letterId;
+  final int themeId;
 
-  _WordListState(this.routeBus, this.letterId);
+  _PhraseListState(this.routeBus, this.themeId);
 
   var dataList = new List<Map<String, dynamic>>();
 
@@ -27,7 +28,7 @@ class _WordListState extends State<WordList> {
     routeBus.dbf.then((db) {
       db
           .rawQuery(
-          "SELECT WordID, WordName FROM Word WHERE LangID=${routeBus.languageId} AND LetterID = $letterId;")
+          "SELECT PhraseID, PhraseName FROM Phrase WHERE LangID=${routeBus.languageId} AND ThemeID = $themeId;")
           .then((value) {
         setState(() {
           dataList = value.toList();
@@ -60,10 +61,10 @@ class _WordListState extends State<WordList> {
                 onTap: () {
                   Navigator.of(context).push(
                       Const.customRoute((context) {
-                        return VersesByWord(
+                        return VersesByTheme(
                           routeBus: routeBus,
-                          letterId: letterId,
-                          wordId: itemValue.first,
+                          themeId: themeId,
+                          phraseId: itemValue.first,
                         );
                       })
                   );

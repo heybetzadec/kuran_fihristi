@@ -24,8 +24,6 @@ class _ChapterListState extends State<ChapterList> {
   @override
   void initState() {
     routeBus.dbf.then((db) {
-      print('--> SELECT ChapterID, ChapterName  FROM Chapter WHERE TranslationID=${routeBus.translationId} ORDER BY ChapterID;');
-
       db.rawQuery("SELECT ChapterID, ChapterName  FROM Chapter WHERE TranslationID=${routeBus.translationId} ORDER BY ChapterID;").then((value) {
         setState(() {
           dataList = value.toList();

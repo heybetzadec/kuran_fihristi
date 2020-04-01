@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:kuranfihristi/help/base_app_bar.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
