@@ -25,14 +25,11 @@ class _VersesByThemeState extends State<VersesByTheme> {
   @override
   void initState() {
     routeBus.dbf.then((db) {
-      print("SELECT p.ChapterID, p.VerseID, p.VerseText FROM VerseByPhrase AS vp "
-          "LEFT OUTER JOIN Phrase AS p ON p.ChapterID = vp.ChapterID AND p.VerseID = vp.VerseID "
-          "WHERE vp.LangID=${routeBus.languageId} AND vp.LetterID = $themeId AND vp.WordId =$phraseId AND p.TranslationID=${routeBus.translationId}");
       db
           .rawQuery(
-          "SELECT p.ChapterID, p.VerseID, p.VerseText FROM VerseByPhrase AS vp "
-              "LEFT OUTER JOIN Phrase AS p ON p.ChapterID = vp.ChapterID AND p.VerseID = vp.VerseID "
-              "WHERE vp.LangID=${routeBus.languageId} AND vp.LetterID = $themeId AND vp.WordId =$phraseId AND p.TranslationID=${routeBus.translationId}")
+          "SELECT v.ChapterID, v.VerseID, v.VerseText FROM VerseByPhrase AS vw " +
+          "LEFT OUTER JOIN Verse AS v ON v.ChapterID = vw.ChapterID AND v.VerseID = vw.VerseID " +
+      "WHERE vw.LangID=${routeBus.languageId} AND v.TranslationID=${routeBus.translationId} AND vw.ThemeID = $themeId AND vw.PhraseID =$phraseId;")
           .then((value) {
         setState(() {
           dataList = value.toList();

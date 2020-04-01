@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 enum TabItem { chapter, words, theme, names, other }
 
 Map<TabItem, String> tabName = {
-  TabItem.chapter: 'Sura',
+  TabItem.chapter: 'Surələr',
   TabItem.words: 'Words',
   TabItem.theme: 'Theme',
   TabItem.names: 'Names',

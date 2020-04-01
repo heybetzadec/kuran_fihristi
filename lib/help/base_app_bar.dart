@@ -13,7 +13,12 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: false,
-      title: Text(title),
+      title: Text(
+          title,
+        style: TextStyle(
+          fontSize: 22
+        ),
+      ),
     );
   }
 
