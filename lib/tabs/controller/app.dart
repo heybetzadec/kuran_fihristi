@@ -34,7 +34,9 @@ class AppState extends State<App> {
     var dbf = getDatabase();
     routeBus = new RouteBus(
         eventBus: eventBus,
-        dbf: dbf
+        dbf: dbf,
+      languageId: 1,
+      translationId: 121
     );
     super.initState();
   }

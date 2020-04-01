@@ -1,14 +1,8 @@
-import 'dart:io';
-
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:kuranfihristi/help/base_app_bar.dart';
 import 'package:kuranfihristi/help/const.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/tabs/tab1/verse_list.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:flutter/services.dart';
 
 class ChapterList extends StatefulWidget {
   final RouteBus routeBus;
@@ -30,7 +24,9 @@ class _ChapterListState extends State<ChapterList> {
   @override
   void initState() {
     routeBus.dbf.then((db) {
-      db.rawQuery("SELECT ChapterID, ChapterName  FROM Chapter WHERE DatabaseID=121 ORDER BY ChapterID;").then((value) {
+      print('--> SELECT ChapterID, ChapterName  FROM Chapter WHERE TranslationID=${routeBus.translationId} ORDER BY ChapterID;');
+
+      db.rawQuery("SELECT ChapterID, ChapterName  FROM Chapter WHERE TranslationID=${routeBus.translationId} ORDER BY ChapterID;").then((value) {
         setState(() {
           dataList = value.toList();
         });

@@ -18,8 +18,6 @@ class _VerseListState extends State<VerseList> {
   final RouteBus routeBus;
   final int chapterId;
 
-  File photo;
-
   _VerseListState(this.routeBus, this.chapterId);
 
   var dataList = new List<Map<String, dynamic>>();
@@ -29,7 +27,7 @@ class _VerseListState extends State<VerseList> {
     routeBus.dbf.then((db) {
       db
           .rawQuery(
-              "SELECT VerseID, VerseText  FROM Verse WHERE DatabaseID=121 AND ChapterID=$chapterId;")
+              "SELECT VerseID, VerseText  FROM Verse WHERE TranslationID=${routeBus.translationId} AND ChapterID=$chapterId;")
           .then((value) {
         setState(() {
           dataList = value.toList();
