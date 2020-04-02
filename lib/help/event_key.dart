@@ -1,21 +1,28 @@
-class ChapterEvent {
+class AppEvent {
   String value;
-
-  ChapterEvent(this.value);
+  AppEvent(this.value);
 }
-class LetterEvent {
+class BottomNavEvent {
   String value;
-  LetterEvent(this.value);
+  BottomNavEvent(this.value);
 }
-class ThemeEvent {
+class ChapterClickEvent {
   String value;
-  ThemeEvent(this.value);
+  ChapterClickEvent(this.value);
 }
-class NameEvent {
+class LetterClickEvent {
   String value;
-  NameEvent(this.value);
+  LetterClickEvent(this.value);
 }
-class OtherEvent {
+class ThemeClickEvent {
   String value;
-  OtherEvent(this.value);
+  ThemeClickEvent(this.value);
+}
+class NameClickEvent {
+  String value;
+  NameClickEvent(this.value);
+}
+class OtherClickEvent {
+  String value;
+  OtherClickEvent(this.value);
 }

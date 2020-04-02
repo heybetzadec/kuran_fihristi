@@ -55,6 +55,11 @@ class Translations {
     return _localizedValuesEn[key] ?? '** $key not found';
   }
 
+  Map<dynamic, dynamic>all(){
+    return _localizedValues;
+  }
+
+
   static Future<Translations> load(Locale locale) async {
     Translations translations = new Translations(locale);
     String jsonContent = await rootBundle

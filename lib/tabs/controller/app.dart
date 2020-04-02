@@ -4,9 +4,9 @@ import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:kuranfihristi/help/event_key.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
+import 'package:kuranfihristi/help/translations.dart';
 import 'package:kuranfihristi/tabs/controller/bottom_navigation.dart';
 import 'package:kuranfihristi/tabs/controller/tab_navigator.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
@@ -36,43 +36,43 @@ class AppState extends State<App> {
         eventBus: eventBus,
         dbf: dbf,
       languageId: 1,
-      translationId: 121
+      translationId: 121,
+      languageCode: 'az'
     );
     super.initState();
   }
 
 
   void _selectTab(TabItem tabItem) {
-
     switch (tabItem) {
       case TabItem.chapter:
         {
-          eventBus.fire(ChapterEvent('event'));
+          eventBus.fire(ChapterClickEvent('event'));
         }
         break;
       case TabItem.words:
         {
-          eventBus.fire(LetterEvent('event'));
+          eventBus.fire(LetterClickEvent('event'));
         }
         break;
       case TabItem.theme:
         {
-          eventBus.fire(ThemeEvent('event'));
+          eventBus.fire(ThemeClickEvent('event'));
         }
         break;
       case TabItem.names:
         {
-          eventBus.fire(NameEvent('event'));
+          eventBus.fire(NameClickEvent('event'));
         }
         break;
       case TabItem.other:
         {
-          eventBus.fire(OtherEvent('event'));
+          eventBus.fire(OtherClickEvent('event'));
         }
         break;
       default:
         {
-          eventBus.fire(ChapterEvent('event'));
+          eventBus.fire(ChapterClickEvent('event'));
         }
         break;
     }
@@ -86,6 +86,22 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+
+    Map<dynamic, dynamic> translate= new Map<dynamic, dynamic>();
+    Translations.load(Locale(routeBus.languageCode)).then((value) {
+      setState(() {
+        translate = value.all();
+        tabName = {
+          TabItem.chapter: translate["chapters"],
+          TabItem.words: translate["words"],
+          TabItem.theme: translate["themes"],
+          TabItem.names: translate["names"],
+          TabItem.other: translate["other"],
+        };
+      });
+    });
+
+
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
@@ -113,6 +129,7 @@ class AppState extends State<App> {
         bottomNavigationBar: BottomNavigation(
           currentTab: _currentTab,
           onSelectTab: _selectTab,
+          routeBus: routeBus,
         ),
       ),
     );
