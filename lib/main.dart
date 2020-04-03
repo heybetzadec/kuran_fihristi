@@ -48,11 +48,24 @@ class Main extends StatefulWidget {
 
   Main({Key key}) : super(key: key);
 
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _MainState state =
+    context.findAncestorStateOfType<_MainState>();
+    state.changeLanguage(newLocale);
+  }
+
   @override
   _MainState createState() => _MainState();
 }
 
 class _MainState extends State<Main> {
+  Locale _locale = Locale('az');
+
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   _MainState();
 
@@ -69,7 +82,7 @@ class _MainState extends State<Main> {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      locale: Locale('az'),
+      locale: _locale,//Locale('az'),
       supportedLocales: localeUtil.supportedLocales(),
       localeResolutionCallback:
           (Locale locale, Iterable<Locale> supportedLocales) {

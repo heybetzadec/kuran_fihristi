@@ -4,7 +4,7 @@ typedef void LocaleChangeCallback(Locale locale);
 
 class LocaleUtil {
   // Support languages list
-  final List<String> supportedLanguages = ['az', 'tr'];
+  final List<String> supportedLanguages = ['en', 'az', 'tr'];
 
   // Support Locales list
   Iterable<Locale> supportedLocales() =>
@@ -27,7 +27,7 @@ class LocaleUtil {
   /// Get the current system language
   String getLanguageCode() {
     if (languageCode == null) {
-      return "az";
+      return "en";
     }
     return languageCode;
   }

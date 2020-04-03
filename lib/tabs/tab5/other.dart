@@ -1,7 +1,6 @@
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
-import 'package:kuranfihristi/help/event_key.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
+import 'package:kuranfihristi/main.dart';
 
 class Other extends StatefulWidget {
   final RouteBus routeBus;
@@ -22,6 +21,7 @@ class _OtherState extends State<Other> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +29,8 @@ class _OtherState extends State<Other> {
         child: Center(
           child: MaterialButton(
               onPressed: (){
-                routeBus.eventBus.fire(BottomNavEvent('tr'));
-                routeBus.languageCode = 'tr';
+                Locale newLocale = Locale('tr', 'TR');
+                Main.setLocale(context, newLocale);
               },
             child: Text('Dil deyis'),
               ),

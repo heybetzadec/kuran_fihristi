@@ -30,7 +30,6 @@ dependencies:
   cloud_firestore: ^0.12.9+5
 
   event_bus: ^1.1.1
-  flutter_spinkit: ^2.1.0
   tinycolor: ^1.0.2
   flutter_html: ^0.11.1
 

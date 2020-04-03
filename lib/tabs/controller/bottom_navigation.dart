@@ -30,29 +30,14 @@ Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.other: Colors.blue,
 };
 
-class BottomNavigation extends StatefulWidget {
+class BottomNavigation extends StatelessWidget {
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;
   final RouteBus routeBus;
 
-  BottomNavigation({Key key, this.routeBus, this.currentTab, this.onSelectTab}) : super(key: key);
-
-  @override
-  _BottomNavigationState createState() => _BottomNavigationState(routeBus, currentTab, onSelectTab);
-}
-
-class _BottomNavigationState extends State<BottomNavigation> {
-  final TabItem currentTab;
-  final ValueChanged<TabItem> onSelectTab;
-  final RouteBus routeBus;
-
-  _BottomNavigationState(this.routeBus, this.currentTab, this.onSelectTab);
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  const BottomNavigation(
+      {Key key, this.currentTab, this.onSelectTab, this.routeBus, })
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     tabName = {
@@ -63,23 +48,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
       TabItem.other: Translations.of(context).text("other"),
     };
 
-
-    routeBus.eventBus.on<BottomNavEvent>().listen((event) {
-      Translations.load(Locale(event.value)).then((value) {
-        print('event.value = ${event.value}');
-        var translate = value.all();
-        setState(() {
-          tabName = {
-            TabItem.chapter: translate["chapters"],
-            TabItem.words: translate["words"],
-            TabItem.theme: translate["themes"],
-            TabItem.names: translate["names"],
-            TabItem.other: translate["other"],
-          };
-        });
-      });
-    });
-
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: [
@@ -89,9 +57,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
         _buildItem(tabItem: TabItem.names),
         _buildItem(tabItem: TabItem.other),
       ],
-      onTap: (index) => onSelectTab(
-        TabItem.values[index],
-      ),
+      onTap: (index) {
+        onSelectTab(
+          TabItem.values[index],
+        );
+      },
     );
   }
 

@@ -86,22 +86,6 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-
-    Map<dynamic, dynamic> translate= new Map<dynamic, dynamic>();
-    Translations.load(Locale(routeBus.languageCode)).then((value) {
-      setState(() {
-        translate = value.all();
-        tabName = {
-          TabItem.chapter: translate["chapters"],
-          TabItem.words: translate["words"],
-          TabItem.theme: translate["themes"],
-          TabItem.names: translate["names"],
-          TabItem.other: translate["other"],
-        };
-      });
-    });
-
-
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
@@ -179,4 +163,6 @@ class AppState extends State<App> {
       ),
     );
   }
+
+
 }
