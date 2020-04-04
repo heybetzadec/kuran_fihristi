@@ -6,7 +6,6 @@ import 'package:kuranfihristi/help/event_key.dart';
 import 'package:kuranfihristi/help/route_bus.dart';
 import 'package:kuranfihristi/help/translations.dart';
 import 'package:kuranfihristi/tabs/tab1/verse_list.dart';
-import 'package:tinycolor/tinycolor.dart';
 
 class ChapterList extends StatefulWidget {
   final RouteBus routeBus;
@@ -34,12 +33,6 @@ class _ChapterListState extends State<ChapterList> {
   void initState() {
     searchFocusNode = FocusNode();
     scrollController = ScrollController();
-
-//    Translations.load(Locale(routeBus.languageCode)).then((value) {
-//      setState(() {
-//        translate = value.all();
-//      });
-//    });
 
     routeBus.dbf.then((db) {
       db
@@ -100,7 +93,7 @@ class _ChapterListState extends State<ChapterList> {
             floating: true,
             flexibleSpace: Container(
               margin: EdgeInsets.only(
-                top: 8,
+                top: 4,
               ),
               child: TextField(
                 controller: searchController,
@@ -109,8 +102,8 @@ class _ChapterListState extends State<ChapterList> {
                 textInputAction: TextInputAction.search,
                 focusNode: searchFocusNode,
                 onChanged: (value) {
-                  var from = ['ə', 'ç', 'ş', ' '];
-                  var change = ['e', 'c', 's', '-'];
+                  var from = ['ə', 'ç', 'ş', 'ü', 'ğ', ' '];
+                  var change = ['e', 'c', 's', 'u', 'g', '-'];
                   if (routeBus.translationId == 121) {
                     value = replaceAll(value, from, change);
                   }
@@ -172,12 +165,39 @@ class _ChapterListState extends State<ChapterList> {
                       });
                     },
                     child: ListTile(
-                      title: Text('${itemValue.first}. ${itemValue.last}'),
+                      title: Text(
+                        '${itemValue.first}. ${itemValue.last}',
+                        style: TextStyle(
+                            fontSize: 18
+                        ),
+                      ),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
                         size: 18,
                       ),
                     ),
+//                    child: Container(
+//                      padding: EdgeInsets.only(
+//                        left: 20,
+//                        right: 20
+//                      ),
+//                      height: 40,
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        children: <Widget>[
+//                          Text(
+//                              '${itemValue.first}. ${itemValue.last}',
+//                            style: TextStyle(
+//                              fontSize: 18
+//                            ),
+//                          ),
+//                          Icon(
+//                            Icons.arrow_forward_ios,
+//                            size: 18,
+//                          )
+//                        ],
+//                      ),
+//                    ),
                   ),
                 );
               },
